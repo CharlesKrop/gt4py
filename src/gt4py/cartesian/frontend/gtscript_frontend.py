@@ -1032,9 +1032,9 @@ class IRMaker(ast.NodeVisitor):
             "f32": nodes.NativeFunction.F32,
             "f64": nodes.NativeFunction.F64,
             "int": (
-                nodes.NativeFunction.F32
+                nodes.NativeFunction.I32
                 if int(os.getenv("GT4PY_LITERAL_PRECISION", "64")) == 32
-                else nodes.NativeFunction.F64
+                else nodes.NativeFunction.I64
             ),
             "float": (
                 nodes.NativeFunction.F32
