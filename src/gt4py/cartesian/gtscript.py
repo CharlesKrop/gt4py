@@ -69,6 +69,8 @@ TYPE_HINT_AND_CAST_BUILTINS = {
     "i64",
     "f32",
     "f64",
+    "int",
+    "float",
 }
 
 REDUCTION_BUILTINS = {"reduce", "add"}
