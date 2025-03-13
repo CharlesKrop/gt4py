@@ -137,11 +137,11 @@ from __future__ import annotations
 
 import enum
 import operator
+import os
 import sys
 from typing import List, Optional, Sequence
 
 import numpy as np
-import os
 
 from gt4py.cartesian.definitions import CartesianSpace
 from gt4py.cartesian.utils.attrib import (
@@ -290,8 +290,12 @@ DataType.FRONTEND_TO_NATIVE = {
     "i64": DataType.INT64,
     "f32": DataType.FLOAT32,
     "f64": DataType.FLOAT64,
-    "int": DataType.INT32 if int(os.getenv("GT4PY_LITERAL_PRECISION", "64")) == 32 else DataType.INT64,
-    "float": DataType.FLOAT32 if int(os.getenv("GT4PY_LITERAL_PRECISION", "64")) == 32 else DataType.FLOAT64,
+    "int": DataType.INT32
+    if int(os.getenv("GT4PY_LITERAL_PRECISION", "64")) == 32
+    else DataType.INT64,
+    "float": DataType.FLOAT32
+    if int(os.getenv("GT4PY_LITERAL_PRECISION", "64")) == 32
+    else DataType.FLOAT64,
 }
 
 DataType.NATIVE_TYPE_TO_NUMPY = {

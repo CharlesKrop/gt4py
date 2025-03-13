@@ -37,7 +37,7 @@ from gt4py.cartesian.gtscript import (
     region,
     sin,
 )
-
+import os
 
 # ---- Utilities -----
 
@@ -1696,6 +1696,34 @@ class TestNativeFunctions:
         def func(in_field: gtscript.Field[np.float_]):
             with computation(PARALLEL), interval(...):
                 in_field = asin(in_field) + 1 if 1 < in_field else sin(in_field)
+
+        parse_definition(func, name=inspect.stack()[0][3], module=self.__class__.__name__)
+
+    def test_native_function_int(self):
+        if int(os.getenv("GT4PY_LITERAL_PRECISION", "64")) == 32:
+            int_type = np.int32
+            float_type = np.float32
+        else:
+            int_type = np.int64
+            float_type = np.float64
+
+        def func(in_field: gtscript.Field[float_type], out_field: gtscript.Field[int_type]):
+            with computation(PARALLEL), interval(...):
+                out_field = in_field
+
+        parse_definition(func, name=inspect.stack()[0][3], module=self.__class__.__name__)
+
+    def test_native_function_float(self):
+        if int(os.getenv("GT4PY_LITERAL_PRECISION", "64")) == 32:
+            int_type = np.int32
+            float_type = np.float32
+        else:
+            int_type = np.int64
+            float_type = np.float64
+
+        def func(in_field: gtscript.Field[int_type], out_field: gtscript.Field[float_type]):
+            with computation(PARALLEL), interval(...):
+                out_field = in_field
 
         parse_definition(func, name=inspect.stack()[0][3], module=self.__class__.__name__)
 
