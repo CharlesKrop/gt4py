@@ -1709,7 +1709,7 @@ class TestNativeFunctions:
     def test_native_function_float(self):
         def func(in_field: gtscript.Field[np.float_], out_field: gtscript.Field[np.float_]):
             with computation(PARALLEL), interval(...):
-                out_field = int(in_field)
+                out_field = float(in_field)
 
         parse_definition(func, name=inspect.stack()[0][3], module=self.__class__.__name__)
 
